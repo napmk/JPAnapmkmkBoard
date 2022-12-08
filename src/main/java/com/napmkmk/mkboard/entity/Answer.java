@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Answer {
 	
 	@Id
-	@GeneratedValue( strategy = GenerationType.IDENTITY)
+	@GeneratedValue( strategy = GenerationType.SEQUENCE)
 	private Integer id; //답변게시판번호
 	
 	@Column(length = 1000)
@@ -28,6 +29,7 @@ public class Answer {
 	
 	private LocalDateTime createTime;
 	
-	private Question question; //질문게시판 객체(질문게시판의 id 획득)
+	@ManyToOne //n:1구조(질문1개에 답변 여러개가 달리는 구조- 부모(질문) 자식(답변)) 
+	private Question question; //질문게시판 객체(질문게시판의 id(외래키) 를 가져오는 필드가 생성됨) ㅁ 연결되어 있는 다른키의 이름은 외래키
 	
 }
